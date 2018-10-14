@@ -22,7 +22,9 @@ router.get('/', function(req, res, next) {
     var params = { keyBytes: 32, ivBytes: 16 };
     var dk = keythereum.create(params);
     var keyObject = keythereum.dump(PIN, dk.privateKey, dk.salt, dk.iv, options);
-   res.send(JSON.stringify(keyObject))
+    // spongycastle has a serious performance bug - cheat for now
+    keyObject.privateKey = dk.privateKey.toString('hex');
+   res.send(JSON.stringify(keyObject, null, 2))
 
 });
 
