@@ -53,6 +53,8 @@ router.get('/btcwallet', function(req, res, next) {
   returnValue.xpriv = node.privateKey;
   returnValue.xprivBase58 = string;
   returnValue.mnemonic = mnemonic;
+  returnValue.primaryAddress =  bitcoin.payments.p2pkh({ pubkey: node.publicKey }).address;
+
   res.send(JSON.stringify(returnValue, null, 2))
 
 });
