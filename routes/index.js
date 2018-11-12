@@ -54,7 +54,10 @@ router.get('/btcwallet', function(req, res, next) {
   returnValue.xprivBase58 = string;
   returnValue.mnemonic = mnemonic;
   returnValue.primaryAddress =  bitcoin.payments.p2pkh({ pubkey: node.publicKey }).address;
-
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
   res.send(JSON.stringify(returnValue, null, 2))
 
 });
